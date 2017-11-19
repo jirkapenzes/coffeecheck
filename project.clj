@@ -12,6 +12,7 @@
                  [clj-time "0.14.2"]
                  [javax.servlet/servlet-api "2.5"]
                  [com.velisco/clj-ftp "0.3.9"]
+                 [ring/ring-json "0.4.0"]
                  [ring/ring-jetty-adapter "1.3.2"]]
   :plugins [[lein-ring "0.9.7"]]
   :main coffeecheck.handler
