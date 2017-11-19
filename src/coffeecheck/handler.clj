@@ -64,6 +64,7 @@
                                        metadataFileName)))
 
 (defn process-imageUrl [imageUrl]
+  (println imageUrl)
   (->> (download imageUrl)
        (upload ftpAddress)
        (write-to-metadata)
@@ -79,17 +80,14 @@
                                  "meta-url" metadataUrl
                                  "meta-file" metadataFileName
                                  }))
-           (GET "/" []
-             {
-              :server        server
-              :username      username
-              :ftpAddress    ftpAddress
-              :metadata-url  metadataUrl
-              :metadata-file metadataFileName})
+           (POST "/" [& params]
+             (if (contains? params :image-url)
+               (process-imageUrl (:image-url params))
+               (str "You need define image url")))
            (route/not-found "Not Found"))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (wrap-defaults app-routes (assoc-in site-defaults [:security :anti-forgery] false)))
 
 (defn -main []
   (let [port (Integer/parseInt (get (System/getenv) "PORT" "5000"))]
