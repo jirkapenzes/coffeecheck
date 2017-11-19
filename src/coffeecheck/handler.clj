@@ -83,7 +83,7 @@
            (POST "/" [& params]
              (if (contains? params :image-url)
                (process-imageUrl (:image-url params))
-               (str "You need define image url")))
+               (str "You need define image url" params)))
            (route/not-found "Not Found"))
 
 (def app
