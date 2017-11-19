@@ -10,9 +10,7 @@
             [clj-time.core :as t]
             [clj-time.format :as f]
             [clj-time.local :as l]
-            [environ.core :refer [env]]
-            [ring.util.response :refer :all]
-            [ring.middleware.json :refer [wrap-json-response]]))
+            [environ.core :refer [env]]))
 
 (def server (env :server))
 (def username (env :username))
@@ -72,20 +70,17 @@
        (publish-metadata)))
 
 (defroutes app-routes
-           (GET "/version" [] (response {:name "checked.jirkovo.coffee" :version "1.0"}))
-           (GET "/" [] (response
+           (GET "/" []
              {
               :server        server
               :username      username
               :ftpAddress    ftpAddress
               :metadata-url  metadataUrl
-              :metadata-file metadataFileName}))
+              :metadata-file metadataFileName})
            (route/not-found "Not Found"))
 
-
 (def app
-  (-> app-routes
-      wrap-json-response))
+  (wrap-defaults app-routes site-defaults))
 
 (defn -main []
   (let [port (Integer/parseInt (get (System/getenv) "PORT" "5000"))]
