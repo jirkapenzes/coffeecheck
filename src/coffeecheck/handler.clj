@@ -4,6 +4,7 @@
             [compojure.route :as route]
             [clojure.java.io :as io]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [ring.adapter.jetty :as jetty]
             [miner.ftp :as ftp]
             [clojure.data.json :as json]
             [clj-time.core :as t]
