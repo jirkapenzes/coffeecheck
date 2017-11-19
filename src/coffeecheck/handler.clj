@@ -14,7 +14,7 @@
 
 (def server (env :server))
 (def username (env :username))
-(def password (env password))
+(def password (env :password))
 (def ftpAddress (str "ftp://" username ":" password "@" server))
 (def metadataUrl (env :metadata-url))
 (def metadataFileName :metadata-file)
