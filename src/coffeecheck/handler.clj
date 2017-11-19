@@ -80,3 +80,7 @@
 
 (def app
   (wrap-defaults app-routes site-defaults))
+
+(defn -main []
+  (let [port (Integer/parseInt (get (System/getenv) "PORT" "5000"))]
+    (jetty/run-jetty app-routes {:port port})))
