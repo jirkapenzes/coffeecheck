@@ -64,11 +64,11 @@
                                        metadataFileName)))
 
 (defn process-imageUrl [imageUrl]
-  (println imageUrl)
   (->> (download imageUrl)
        (upload ftpAddress)
        (write-to-metadata)
-       (publish-metadata)))
+       (publish-metadata)
+       (str "Success")))
 
 (defroutes app-routes
            (GET "/version" [] (json/write-str
