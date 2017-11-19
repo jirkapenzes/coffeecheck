@@ -70,7 +70,7 @@
        (publish-metadata)))
 
 (defroutes app-routes
-           (GET "/version" [] (str "version: 1.0; " metadataUrl))
+           (GET "/version" [] (str "version: 1.0; " metadataUrl (get (System/getenv) "metadata-url" "XXX")))
            (GET "/" []
              {
               :server        server
