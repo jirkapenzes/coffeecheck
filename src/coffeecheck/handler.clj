@@ -70,7 +70,15 @@
        (publish-metadata)))
 
 (defroutes app-routes
-           (GET "/version" [] (str "version: 1.0; " metadataUrl (get (System/getenv) "metadata-url" "XXX")))
+           (GET "/version" [] (json/write-str
+                                {
+                                 "name" "check.jirkovo.coffee"
+                                 "version" "1.0"
+                                 "server" server
+                                 "username" username
+                                 "meta-url" metadataUrl
+                                 "meta-file" metadataFileName
+                                 }))
            (GET "/" []
              {
               :server        server
