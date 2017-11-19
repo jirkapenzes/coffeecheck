@@ -84,6 +84,7 @@
              (if (contains? params :image-url)
                (process-imageUrl (:image-url params))
                (str "You need define image url" params)))
+           (POST "/x" [& params] (str params))
            (route/not-found "Not Found"))
 
 (def app
@@ -91,4 +92,4 @@
 
 (defn -main []
   (let [port (Integer/parseInt (get (System/getenv) "PORT" "5000"))]
-    (jetty/run-jetty app-routes {:port port})))
+    (jetty/run-jetty app {:port port})))
