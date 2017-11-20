@@ -67,8 +67,7 @@
   (->> (download imageUrl)
        (upload ftpAddress)
        (write-to-metadata)
-       (publish-metadata)
-       (str "Success")))
+       (publish-metadata)))
 
 (defroutes app-routes
            (GET "/version" [] (json/write-str
