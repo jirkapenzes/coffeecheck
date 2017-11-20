@@ -17,7 +17,7 @@
 (def password (env :password))
 (def ftpAddress (str "ftp://" username ":" password "@" server))
 (def metadataUrl (env :metadata-url))
-(def metadataFileName :metadata-file)
+(def metadataFileName (env :metadata-file))
 
 (defn uuid [] (str (java.util.UUID/randomUUID)))
 (defn current-month [] (f/unparse (f/formatter "yyyy-MM") (l/local-now)))
